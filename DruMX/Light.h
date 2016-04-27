@@ -2,8 +2,7 @@
 #define LIGHT_H
 
 #include "Types.h"
-
-class Effect;
+#include "Effect.h"
 
 class Light
 {
@@ -13,16 +12,17 @@ class Light
 		int g;
 		int b;
 	
-    public:
+  public:
 		int pin;
 		unsigned long lastUpdateTime;
-		EffectType effectType;
+		Effect *effect;
 	
-		Light(int analogPin, int channel, EffectType effectType);
+		Light(int analogPin, int channel, Effect effect);
 		void On();
 		void Off();
 		bool IsOn();
 		void SetBrightness(int r, int g, int b);
+    void Update();
 };
 
 #endif

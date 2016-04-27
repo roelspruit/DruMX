@@ -1,13 +1,19 @@
 #include <DmxSimple.h>
 #include <Arduino.h>
 #include "Light.h"
+#include "Effect.h"
 
-Light::Light(int analogPin, int channel, EffectType effectType)
+Light::Light(int analogPin, int channel, Effect effect)
 {
   this->pin = analogPin;
   this->startChannel = channel;
   this->lastUpdateTime = 0;
-  this->effectType = effectType;
+  this->effect = &effect;
+}
+
+void Light::Update()
+{
+  this->effect->ApplyToLight(this);
 }
 
 void Light::On()
